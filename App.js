@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,16 +12,44 @@ import {
   ScrollView,
 } from "react-native";
 import Task from "./components/Task.js";
-
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
+  const storeData = async (key, value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      console.error("storeData error:", e.message);
+    }
+  };
+
+  const getData = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      const result = jsonValue != null ? JSON.parse(jsonValue) : null;
+      return result;
+    } catch (e) {
+      console.error("getData error", e.message);
+    }
+  };
+
+  // storeData("task", [1,2,3,4,5,6,7,8,9])
+
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
+
+  useEffect(() => {
+    getData("task").then((v) =>
+      v !== null && v.length !== 0 ? setTaskList(v) : ""
+    );
+  }, []);
+
   const handleTask = () => {
     if (task !== "") {
       Keyboard.dismiss();
       setTaskList([...taskList, task]);
+      storeData("task", [...taskList, task]);
       setTask("");
     }
   };
@@ -30,14 +58,14 @@ export default function App() {
     let itemCopy = [...taskList];
     itemCopy.splice(index, 1);
     setTaskList(itemCopy);
+    storeData("task", itemCopy);
   };
 
   return (
     <View style={styles.container}>
       {/* Today's Tasks */}
       <View style={styles.taskWrapper}>
-
-      {/*write a task*/}
+        {/*write a task*/}
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
@@ -56,9 +84,6 @@ export default function App() {
           </TouchableOpacity>
         </KeyboardAvoidingView>
 
-
-
-
         <Text style={styles.sectionTitle}>Today's Tasks</Text>
 
         <ScrollView>
@@ -76,11 +101,6 @@ export default function App() {
             })}
           </View>
         </ScrollView>
-
-        
-
-
-
       </View>
     </View>
   );
@@ -124,8 +144,9 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderColor: "#E84545",
     borderWidth: 1,
-    width: 250,
     color: "white",
+    width: "100%",
+    marginRight: 20,
   },
   addWrapper: {
     width: 60,

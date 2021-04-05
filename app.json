@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "To DO",
+    "name": "To Do",
     "slug": "to-do",
     "platform": ["ios", "android", "web"],
     "version": "1.0.0",
@@ -24,7 +24,7 @@
       "versionCode": 1
     },
     "web": {
-      "name": "my-app",
+      "name": "To Do",
       "start_url": "/",
       "backgroundColor": "#ffffff",
       "description": "This is a demo app",
