@@ -2,7 +2,6 @@
   "expo": {
     "name": "To Do",
     "slug": "to-do",
-    "platform": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,9 +30,9 @@
       "display": "standalone",
       "themeColor": "#008080",
       "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
       },
       "favicon": "./assets/favicon.png"
     }
