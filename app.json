@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "to-do-app",
-    "slug": "to-do-app",
+    "name": "To DO",
+    "slug": "to-do",
+    "platform": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,19 +14,27 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.arif.todo",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.arif.todo",
+      "versionCode": 1
     },
     "web": {
+      "name": "my-app",
+      "start_url": "/",
+      "backgroundColor": "#ffffff",
+      "description": "This is a demo app",
+      "display": "standalone",
+      "themeColor": "#008080",
+      "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+      },
       "favicon": "./assets/favicon.png"
     }
   }
